@@ -1920,8 +1920,9 @@ var AnnotatorUI = (function ($, window, undefined) {
         });
       }
       if (linkFilled) {
-        $('#span_search_fieldset').show();
-        $('#viewspan_search_fieldset').show();
+        /* 【N0.4】
+         $('#span_search_fieldset').show();
+         $('#viewspan_search_fieldset').show();*/
       } else {
         $('#span_search_fieldset').hide();
         $('#viewspan_search_fieldset').hide();
@@ -2292,14 +2293,16 @@ var AnnotatorUI = (function ($, window, undefined) {
       $('#waiter').dialog('open');
     };
 
+    /* 【N0.1】 删除‘Add Frag.’按钮
+     {
+        id: 'span_form_add_fragment',
+        text: "Add Frag.",
+        click: addFragment
+      }, */
     dispatcher.post('initForm', [spanForm, {
       alsoResize: '#entity_and_event_wrapper',
       width: 760,
       buttons: [{
-        id: 'span_form_add_fragment',
-        text: "Add Frag.",
-        click: addFragment
-      }, {
         id: 'span_form_delete',
         text: "Delete",
         click: deleteSpan

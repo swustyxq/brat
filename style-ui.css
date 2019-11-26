@@ -586,3 +586,24 @@ div.scroll_wrapper_upper div.scroller {
     font-weight: bold;
     src: local('Astloch Bold'), local('Astloch-Bold'), url('static/fonts/Astloch-Bold.ttf') format('truetype');
 }
+
+/* 【N0.1】屏蔽Annotation中底部的‘Add Frag.’按钮 */
+#span_form_add_fragment {
+    display: none;
+}
+
+/* 【N0.2】屏蔽Annotation中的Text-fieldset模块中的link */
+#span_highlight_link, #arc_highlight_link, #viewspan_highlight_link {
+    display: none;
+}
+
+/* 【N0.3】屏蔽左下角的图标 */
+#pulluptrigger {
+    display: none;
+}
+
+/* 【N0.4】 屏蔽Annotation中的Search-fieldset模块 */
+#span_search_fieldset, #viewspan_search_fieldset {
+    display: none;
+}
+
