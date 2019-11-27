@@ -31,7 +31,9 @@
           'client/src/visualizer.js',
           'client/src/visualizer_ui.js',
           'client/src/annotator_ui.js',
-          'client/src/spinner.js'
+          'client/src/spinner.js',
+          // custom modules 用户自定义的脚本
+          'client/src/init_page.js'// 【N0.5】
       );
       head.ready(function() {
           // var dispatcher = new Dispatcher(); // XXX DEBUG
@@ -46,7 +48,12 @@
           var logger = new AnnotationLog(dispatcher);
           // Util.profileEnable();
           dispatcher.post('init');
+          /* 【N0.5】页面初始化完成后自动登录 */
+          var initPage = new InitPage(dispatcher);
       });
+      window.onload= function () {
+          dispatcher.post('autoLogin');// 【N0.5】
+      }
 
     </script>
     <link rel="stylesheet" type="text/css" href="style-vis.css"/>

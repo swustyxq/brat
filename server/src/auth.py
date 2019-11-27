@@ -79,7 +79,7 @@ def login(user, password):
         raise InvalidAuthError
 
     get_session()['user'] = user
-    Messager.info('Hello!')
+    #Messager.info('Hello!')
     return {}
 
 def logout():
@@ -106,7 +106,7 @@ def allowed_to_read(real_path):
     # add trailing slash to directories, required to comply to robots.txt
     if isdir(real_path):
         data_path = '%s/' % ( data_path )
-        
+
     real_dir = dirname(real_path)
     robotparser = ProjectConfiguration(real_dir).get_access_control()
     if robotparser is None:
