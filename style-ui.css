@@ -4,7 +4,7 @@
 /* Styling for the user-interface */
 
 html {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #navbuttons * {
@@ -607,3 +607,89 @@ div.scroll_wrapper_upper div.scroller {
     display: none;
 }
 
+/* 【N0.6】自定义头部 */
+#custom-header {
+    position: fixed;
+    height: 30px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: #ffffff;
+    box-shadow: 5px 5px 5px #999999;
+    -ms-border-top: 1px solid #999999;
+}
+
+#custom-header #brat-file-title {
+    float: left;
+    padding-left: 10px;
+    line-height: 30px;
+    color: #000000;
+    font-weight: bold;
+}
+
+#custom-header #right-switch-wrap {
+    float: right;
+    height: 30px;
+    padding-right: 10px;
+
+}
+
+#right-switch-wrap .switch-title {
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    color: #666;
+}
+
+/*  */
+#right-switch-wrap .switch-wrap-on {
+    display: inline-block;
+    position: relative;
+    width: 35px;
+    height: 20px;
+    content: attr(data-content);
+    border-radius: 15px;
+    font-size: 12px;
+    -webkit-appearance: none;
+    user-select: none;
+    outline: none;
+    background-color: #5bc0de;
+    border: 1px solid #5bc0de;
+    box-shadow: #dfdfdf 0 0 0 0 inset;
+
+}
+
+#right-switch-wrap .switch-wrap-off {
+    display: inline-block;
+    position: relative;
+    width: 35px;
+    height: 20px;
+    content: attr(data-content);
+    border-radius: 15px;
+    font-size: 12px;
+    -webkit-appearance: none;
+    user-select: none;
+    outline: none;
+    background-color: #dfdfdf;
+    border: 1px solid #dfdfdf;
+    box-shadow: #46b8da 0 0 0 0 inset;
+}
+
+#right-switch-wrap #brat-mark-switch {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-color: #fff;
+    cursor: pointer;
+}
+
+#brat-mark-switch.switch-on {
+    top: 1px;
+    left: 16px;
+}
+
+#brat-mark-switch.switch-off {
+    top: 1px;
+    left: 1px;
+}

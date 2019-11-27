@@ -53,6 +53,7 @@
       });
       window.onload = function () {
         dispatcher.post('autoLogin');// 【N0.5】
+        dispatcher.post('switchChange');// 【N0.6】
       }
 
     </script>
@@ -153,6 +154,16 @@
         </div>
     </div>
 </div>
+<div id="custom-header">
+    <div id="brat-file-title">文档标题</div>
+    <div id="right-switch-wrap">
+        <span class="switch-title">预标注文档</span>
+        <div class="switch-wrap-off">
+            <button id="brat-mark-switch" class="switch-wrap-off switch-off"/>
+        </div>
+    </div>
+</div>
+
 <div id="svg"></div>
 <form id="import_form" class="dialog" title="Import">
     <fieldset id="import_form_docid">
