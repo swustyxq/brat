@@ -5,6 +5,7 @@
 
 html {
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #navbuttons * {
@@ -608,9 +609,13 @@ div.scroll_wrapper_upper div.scroller {
 }
 
 /* 【N0.6】自定义头部 */
+#svg {
+    margin-top: 40px !important;
+}
+
 #custom-header {
     position: fixed;
-    height: 30px;
+    height: 40px;
     width: 100%;
     top: 0;
     left: 0;
@@ -623,26 +628,30 @@ div.scroll_wrapper_upper div.scroller {
 #custom-header #brat-file-title {
     float: left;
     padding-left: 10px;
-    line-height: 30px;
+    line-height: 40px;
     color: #000000;
     font-weight: bold;
 }
 
 #custom-header #right-switch-wrap {
     float: right;
-    height: 30px;
+    height: 40px;
     padding-right: 10px;
 
 }
 
 #right-switch-wrap .switch-title {
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     display: inline-block;
     color: #666;
 }
 
-/*  */
+#right-switch-wrap .switch-btn-wrap {
+    float: right;
+    margin: 9px 4px;
+}
+
 #right-switch-wrap .switch-wrap-on {
     display: inline-block;
     position: relative;
@@ -693,3 +702,23 @@ div.scroll_wrapper_upper div.scroller {
     top: 1px;
     left: 1px;
 }
+
+/*【N0.7】自定义底部状态信息 */
+#custom-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding-left: 10px;
+    height: 25px;
+    line-height: 25px;
+    width: 100%;
+    background: #ccccff;
+    color: #343434;
+}
+
+#save-mark-btn {
+    float: right;
+    margin: 6px 10px 0 0;
+    outline: none;
+}
+

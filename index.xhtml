@@ -53,7 +53,7 @@
       });
       window.onload = function () {
         dispatcher.post('autoLogin');// 【N0.5】
-        dispatcher.post('switchChange');// 【N0.6】
+        dispatcher.post('topMenuEvent');// 【N0.6】开关和保存事件绑定
       }
 
     </script>
@@ -154,15 +154,30 @@
         </div>
     </div>
 </div>
+<!-- 【N0.6】自定义页头 -->
 <div id="custom-header">
-    <div id="brat-file-title">文档标题</div>
+    <div id="brat-file-title"></div>
     <div id="right-switch-wrap">
         <span class="switch-title">预标注文档</span>
-        <div class="switch-wrap-off">
-            <button id="brat-mark-switch" class="switch-wrap-off switch-off"/>
+        <div class="switch-btn-wrap">
+            <div class="switch-wrap-off">
+                <button id="brat-mark-switch" class="switch-wrap-off switch-off"/>
+            </div>
         </div>
     </div>
+    <button id="save-mark-btn" type="button"
+            class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+        <span class="ui-button-text">保存标注</span>
+    </button>
 </div>
+<!-- 【N0.7】自定义底部状态 -->
+<div id="custom-footer">
+    <div id="footer-update-time">文档尚未标注</div>
+</div>
+<!-- 悬浮在状态上显示 -->
+<div id="save-mark-wrap">
+</div>
+
 
 <div id="svg"></div>
 <form id="import_form" class="dialog" title="Import">
