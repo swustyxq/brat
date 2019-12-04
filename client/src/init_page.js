@@ -69,7 +69,7 @@ var InitPage = (function ($, window, undefined) {
             success: function (response) {
               let dateStr = DateFormat(new Date(), "yyyy年MM月dd日 hh时mm分ss秒");
               $("#footer-update-time").html('最新修改时间：' + dateStr)
-              window.location.reload();
+              dispatcher.post('renderData');
               changeCustomSpinner(false);
             },
             error: function (response, textStatus, errorThrown) {
@@ -93,7 +93,7 @@ var InitPage = (function ($, window, undefined) {
             }),
             success: function (response) {
               $("#footer-update-time").html('文档尚未标注')
-              window.location.reload();
+              dispatcher.post('renderData');
               changeCustomSpinner(false);
             },
             error: function (response, textStatus, errorThrown) {
@@ -133,7 +133,7 @@ var InitPage = (function ($, window, undefined) {
           success: function (response) {
             // 调用python保存标注接口
             $.ajax({
-              url: pythonAPI + 'ave_ann_time',
+              url: pythonAPI + 'save_ann_time',
               type: 'POST',
               headers: {
                 'Accept': 'application/json, text/plain, */*'
