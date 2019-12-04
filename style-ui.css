@@ -5,7 +5,6 @@
 
 html {
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 #navbuttons * {
@@ -619,14 +618,19 @@ div.scroll_wrapper_upper div.scroller {
     width: 100%;
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: space-between;
     z-index: 2;
     background: #ffffff;
     box-shadow: 5px 5px 5px #999999;
     -ms-border-top: 1px solid #999999;
 }
 
+#custom-header .right {
+    display: flex;
+}
+
 #custom-header #brat-file-title {
-    float: left;
     padding-left: 10px;
     line-height: 40px;
     color: #000000;
@@ -634,7 +638,6 @@ div.scroll_wrapper_upper div.scroller {
 }
 
 #custom-header #right-switch-wrap {
-    float: right;
     height: 40px;
     padding-right: 10px;
 
@@ -717,8 +720,27 @@ div.scroll_wrapper_upper div.scroller {
 }
 
 #save-mark-btn {
-    float: right;
-    margin: 6px 10px 0 0;
+    margin: 6px 10px;
     outline: none;
 }
 
+/* 全局加载进度蒙层 */
+#custom-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #aaaaaa;
+    opacity: 0.3;
+}
+
+#custom-spinner img {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
