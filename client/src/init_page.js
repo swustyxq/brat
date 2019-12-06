@@ -18,7 +18,8 @@ var InitPage = (function ($, window, undefined) {
       var search = window.location.href.split('?')[1];
       if (search) {
         var paramArr = search.split('&');
-        fileName = paramArr[0].split('=')[1];// 文件名字
+        fileName = window.location.href.split('#/kipf/')[1].split('?')[0];;// 文件名字md5编码过后
+        var canDecodeName =  paramArr[0].split('=')[1];// java地址
         javaAPI = paramArr[1].split('=')[1];// java地址
         pythonAPI = paramArr[2].split('=')[1];// python 地址
         markAPI = paramArr[3].split('=')[1];// 自动标注开关
@@ -27,7 +28,7 @@ var InitPage = (function ($, window, undefined) {
         bratPath = `${window.location.hostname}:${path}/`
         // bratPath = `10.201.82.253:${path}/`
 
-        fileName && $("#brat-file-title").html(decodeBratName(fileName));  // 数据解码【解决中文乱码问题】
+        canDecodeName && $("#brat-file-title").html(decodeBratName(canDecodeName));  // 数据解码【解决中文乱码问题】
       }
       changeCustomSpinner(false);
     };
@@ -69,7 +70,7 @@ var InitPage = (function ($, window, undefined) {
             success: function (response) {
               let dateStr = DateFormat(new Date(), "yyyy年MM月dd日 hh时mm分ss秒");
               $("#footer-update-time").html('最新修改时间：' + dateStr)
-              dispatcher.post('renderData');
+              dispatcher.post('reloadAllConfig');
               changeCustomSpinner(false);
             },
             error: function (response, textStatus, errorThrown) {
@@ -93,7 +94,7 @@ var InitPage = (function ($, window, undefined) {
             }),
             success: function (response) {
               $("#footer-update-time").html('文档尚未标注')
-              dispatcher.post('renderData');
+              dispatcher.post('reloadAllConfig');
               changeCustomSpinner(false);
             },
             error: function (response, textStatus, errorThrown) {
@@ -155,6 +156,7 @@ var InitPage = (function ($, window, undefined) {
             });
           },
           error: function (response, textStatus, errorThrown) {
+            dispatcher.post('messages', '保存标注不成功');
             changeCustomSpinner(false);
           }
         });
