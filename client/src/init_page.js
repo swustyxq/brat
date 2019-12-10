@@ -18,8 +18,8 @@ var InitPage = (function ($, window, undefined) {
       var search = window.location.href.split('?')[1];
       if (search) {
         var paramArr = search.split('&');
-        fileName = window.location.href.split('#/kipf/')[1].split('?')[0];;// 文件名字md5编码过后
-        var canDecodeName =  paramArr[0].split('=')[1];// java地址
+        fileName = window.location.href.split('#/kipf/')[1].split('?')[0];// 文件名字md5编码过后
+        var canDecodeName = paramArr[0].split('=')[1];// java地址
         javaAPI = paramArr[1].split('=')[1];// java地址
         pythonAPI = paramArr[2].split('=')[1];// python 地址
         markAPI = paramArr[3].split('=')[1];// 自动标注开关
@@ -30,7 +30,6 @@ var InitPage = (function ($, window, undefined) {
 
         canDecodeName && $("#brat-file-title").html(decodeBratName(canDecodeName));  // 数据解码【解决中文乱码问题】
       }
-      changeCustomSpinner(false);
     };
 
     /**
@@ -188,6 +187,7 @@ var InitPage = (function ($, window, undefined) {
         }
         return fmt;
       }
+      changeCustomSpinner(false);
     };
 
     /**
