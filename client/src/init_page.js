@@ -67,12 +67,17 @@ var InitPage = (function ($, window, undefined) {
               output_path: bratPath
             }),
             success: function (response) {
-              let dateStr = DateFormat(new Date(), "yyyy年MM月dd日 hh时mm分ss秒");
-              $("#footer-update-time").html('最新修改时间：' + dateStr)
-              dispatcher.post('reloadAllConfig');
+              if (response.errorCode !== 200) {
+                dispatcher.post('messages', [[[response.message, 'error']]]);
+              } else {
+                let dateStr = DateFormat(new Date(), "yyyy年MM月dd日 hh时mm分ss秒");
+                $("#footer-update-time").html('最新修改时间：' + dateStr)
+                dispatcher.post('reloadAllConfig');
+              }
               changeCustomSpinner(false);
             },
             error: function (response, textStatus, errorThrown) {
+              dispatcher.post('messages', [[[response.message, 'error']]]);
               changeCustomSpinner(false);
             }
           });
@@ -92,11 +97,17 @@ var InitPage = (function ($, window, undefined) {
               "data": fileName
             }),
             success: function (response) {
-              $("#footer-update-time").html('文档尚未标注')
-              dispatcher.post('reloadAllConfig');
+              if (response.errorCode !== 200) {
+                dispatcher.post('messages', [[[response.message, 'error']]]);
+              } else {
+                $("#footer-update-time").html('文档尚未标注')
+                dispatcher.post('reloadAllConfig');
+                dispatcher.post('messages', [[['清空成功', 'comment']]]);
+              }
               changeCustomSpinner(false);
             },
             error: function (response, textStatus, errorThrown) {
+              dispatcher.post('messages', [[[response.message, 'error']]]);
               changeCustomSpinner(false);
             }
           });
@@ -146,16 +157,17 @@ var InitPage = (function ($, window, undefined) {
                 fileId: fileId
               }),
               success: function (response) {
+                dispatcher.post('messages', [[['保存成功', 'comment']]]);
                 changeCustomSpinner(false);
-
               },
               error: function (response, textStatus, errorThrown) {
+                dispatcher.post('messages', [[[response.message, 'error']]]);
                 changeCustomSpinner(false);
               }
             });
           },
           error: function (response, textStatus, errorThrown) {
-            dispatcher.post('messages', '保存标注不成功');
+            dispatcher.post('messages', [[[response.message, 'error']]]);
             changeCustomSpinner(false);
           }
         });
@@ -187,7 +199,12 @@ var InitPage = (function ($, window, undefined) {
         }
         return fmt;
       }
-      changeCustomSpinner(false);
+
+      // 关闭加载对话框
+      setTimeout(function () {
+        changeCustomSpinner(false);
+      }, 2000);
+
     };
 
     /**

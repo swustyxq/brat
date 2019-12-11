@@ -2192,7 +2192,31 @@ var VisualizerUI = (function ($, window, undefined) {
       $('#pulldown, #navbuttons, #spinner').remove();
       dispatcher.post('hideForm');
     };
-    dispatcher.on('init', init).on('dataReady', rememberData).on('annotationIsAvailable', annotationIsAvailable).on('messages', displayMessages).on('displaySpanComment', displaySpanComment).on('displayArcComment', displayArcComment).on('displaySentComment', displaySentComment).on('docChanged', onDocChanged).on('hideComment', hideComment).on('showForm', showForm).on('hideForm', hideForm).on('initForm', initForm).on('collectionLoaded', rememberNormDb).on('collectionLoaded', collectionLoaded).on('spanAndAttributeTypesLoaded', spanAndAttributeTypesLoaded).on('isReloadOkay', isReloadOkay).on('current', gotCurrent).on('doneRendering', onDoneRendering).on('startedRendering', onStartedRendering).on('newSourceData', onNewSourceData).on('savedSVG', savedSVGreceived).on('renderError:noFileSpecified', noFileSpecified).on('renderError:annotationFileNotFound', showAnnotationFileNotFound).on('renderError:unableToReadTextFile', showUnableToReadTextFile).on('renderError:isDirectoryError', reloadDirectoryWithSlash).on('unknownError', showUnknownError).on('keydown', onKeyDown).on('mousemove', onMouseMove).on('dblclick', onDblClick).on('touchstart', onTouchStart).on('touchend', onTouchEnd).on('resize', onResize).on('searchResultsReceived', searchResultsReceived).on('clearSearch', clearSearch).on('clearSVG', showNoDocMessage).on('screamingHalt', onScreamingHalt).on('configurationChanged', configurationChanged).on('configurationUpdated', updateConfigurationUI).on('reloadAllConfig', checkForDocumentChanges);
+
+    var reloadAllConfig = function () {
+      if (coll && doc && dispatcher.post('isReloadOkay', [], 'all')) {
+        opts = {
+          'action': 'getDocumentTimestamp',
+          'collection': coll,
+          'document': doc
+        }
+        dispatcher.post('ajax', [opts, function (response) {
+          if (data) {
+            if (mtime != response.mtime) {
+              dispatcher.post('current', [coll, doc, args, true]);
+              documentChangesTimeout = 1 * 1000;
+            } else {
+              documentChangesTimeout *= 2;
+              if (documentChangesTimeout >= maxDocumentChangesTimeout)
+                documentChangesTimeout = maxDocumentChangesTimeout;
+            }
+          }
+        }]);
+      } else {
+        documentChangesTimeout = 1 * 1000;
+      }
+    };
+    dispatcher.on('init', init).on('dataReady', rememberData).on('annotationIsAvailable', annotationIsAvailable).on('messages', displayMessages).on('displaySpanComment', displaySpanComment).on('displayArcComment', displayArcComment).on('displaySentComment', displaySentComment).on('docChanged', onDocChanged).on('hideComment', hideComment).on('showForm', showForm).on('hideForm', hideForm).on('initForm', initForm).on('collectionLoaded', rememberNormDb).on('collectionLoaded', collectionLoaded).on('spanAndAttributeTypesLoaded', spanAndAttributeTypesLoaded).on('isReloadOkay', isReloadOkay).on('current', gotCurrent).on('doneRendering', onDoneRendering).on('startedRendering', onStartedRendering).on('newSourceData', onNewSourceData).on('savedSVG', savedSVGreceived).on('renderError:noFileSpecified', noFileSpecified).on('renderError:annotationFileNotFound', showAnnotationFileNotFound).on('renderError:unableToReadTextFile', showUnableToReadTextFile).on('renderError:isDirectoryError', reloadDirectoryWithSlash).on('unknownError', showUnknownError).on('keydown', onKeyDown).on('mousemove', onMouseMove).on('dblclick', onDblClick).on('touchstart', onTouchStart).on('touchend', onTouchEnd).on('resize', onResize).on('searchResultsReceived', searchResultsReceived).on('clearSearch', clearSearch).on('clearSVG', showNoDocMessage).on('screamingHalt', onScreamingHalt).on('configurationChanged', configurationChanged).on('configurationUpdated', updateConfigurationUI).on('reloadAllConfig', reloadAllConfig);
   };
 
   return VisualizerUI;
